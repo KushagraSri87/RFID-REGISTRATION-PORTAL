@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Registration Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 15px 0 5px;
+      text-align: left;
+    }
+
+    input[type="text"], input[type="email"], input[type="submit"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 12px 0;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    .loading, .success-message {
+      text-align: center;
+      display: none;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .loading {
+      color: #888;
+    }
+
+    .success-message {
+      color: green;
+      font-weight: bold;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      bottom: -10px;
+      left: -10px;
+      background: linear-gradient(135deg, rgba(116, 235, 213, 0.2), rgba(172, 182, 229, 0.2));
+      z-index: -1;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Event Registration</h2>
+    <form id="registrationForm">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Your Address:</label>
+        <textarea id="address" name="address" placeholder="Enter your address" rows="4" required></textarea>
+      </div>
+
+      <input type="submit" value="Register">
+
+      <!-- Loading and Success Messages -->
+      <p class="loading">Processing your registration...</p>
+      <p class="success-message">Registration Completed Successfully!</p>
+    </form>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw4GyaeKBPBm5AfX18lh6is-JbqKcnKPS_tMwhSetxcFtryf5G0kWyBVMyo9OsXzD6F/exec'; // Google Apps Script URL
+    const form = document.getElementById('registrationForm');
+    const loadingMessage = document.querySelector('.loading');
+    const successMessage = document.querySelector('.success-message');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();  // Prevent default form submission behavior
+
+      // Show the loading message
+      loadingMessage.style.display = 'block';
+      successMessage.style.display = 'none';
+
+      // Send the form data to Google Apps Script
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          loadingMessage.style.display = 'none'; // Hide loading message
+          successMessage.style.display = 'block'; // Show success message
+          form.reset();  // Reset the form fields
+        })
+        .catch(error => {
+          loadingMessage.textContent = 'Error! Please try again.';
+          console.error('Error!', error.message);
+        });
+    });
+  </script>
+</body>
+</html>
