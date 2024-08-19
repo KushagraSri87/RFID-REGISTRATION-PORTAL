@@ -21,11 +21,11 @@
 
     .container {
       background-color: white;
-      padding: 40px;
+      padding: 20px;
       border-radius: 15px;
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      width: 100%;
+      max-width: 90%;
+      width: 500px;
       text-align: center;
       position: relative;
     }
@@ -33,7 +33,7 @@
     h2 {
       color: #2c3e50;
       margin-bottom: 20px;
-      font-size: 26px;
+      font-size: 24px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
@@ -108,6 +108,29 @@
       z-index: -1;
       border-radius: 20px;
     }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+        width: 100%;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input[type="text"], input[type="email"], input[type="tel"], textarea {
+        font-size: 14px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 0;
+      }
+
+      .loading, .success-message {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -137,7 +160,7 @@
       <input type="submit" value="Register">
 
       <p class="loading">Processing your registration...</p>
-      <p class="success-message">Registration Completed Successfully!</p>
+      <p class="success-message">Registration Completed Successfully! <br> Check your email for confirmation.</p>
     </form>
   </div>
 
