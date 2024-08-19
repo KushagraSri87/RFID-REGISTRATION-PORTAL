@@ -136,31 +136,28 @@
 
       <input type="submit" value="Register">
 
-      <!-- Loading and Success Messages -->
       <p class="loading">Processing your registration...</p>
       <p class="success-message">Registration Completed Successfully!</p>
     </form>
   </div>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbw4GyaeKBPBm5AfX18lh6is-JbqKcnKPS_tMwhSetxcFtryf5G0kWyBVMyo9OsXzD6F/exec'; // Google Apps Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw4GyaeKBPBm5AfX18lh6is-JbqKcnKPS_tMwhSetxcFtryf5G0kWyBVMyo9OsXzD6F/exec';
     const form = document.getElementById('registrationForm');
     const loadingMessage = document.querySelector('.loading');
     const successMessage = document.querySelector('.success-message');
 
     form.addEventListener('submit', e => {
-      e.preventDefault();  // Prevent default form submission behavior
+      e.preventDefault();
 
-      // Show the loading message
       loadingMessage.style.display = 'block';
       successMessage.style.display = 'none';
 
-      // Send the form data to Google Apps Script
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => {
-          loadingMessage.style.display = 'none'; // Hide loading message
-          successMessage.style.display = 'block'; // Show success message
-          form.reset();  // Reset the form fields
+          loadingMessage.style.display = 'none';
+          successMessage.style.display = 'block';
+          form.reset();
         })
         .catch(error => {
           loadingMessage.textContent = 'Error! Please try again.';
