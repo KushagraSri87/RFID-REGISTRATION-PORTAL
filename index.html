@@ -20,18 +20,20 @@
     }
 
     .container {
-      background-color: white;
+      background-color: rgba(0, 0, 0, 0.6); /* Black background */
+      color: white;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      max-width: 90%;
-      width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      max-width: 80%; /* Adjusted to match previous website's size */
+      width: 500px; /* Default width for larger screens */
       text-align: center;
       position: relative;
+      backdrop-filter: none; /* No blur effect for desktop */
     }
 
     h2 {
-      color: #2c3e50;
+      color: #ecf0f1;
       margin-bottom: 20px;
       font-size: 24px;
       text-transform: uppercase;
@@ -46,7 +48,7 @@
     }
 
     input[type="text"], input[type="email"], input[type="submit"], input[type="tel"], textarea {
-      width: 100%;
+      width: calc(100% - 24px); /* Adjust width to fit within container padding */
       padding: 12px;
       margin: 10px 0;
       border-radius: 8px;
@@ -54,6 +56,7 @@
       font-size: 16px;
       font-family: 'Poppins', sans-serif;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box; /* Ensure padding and border are included in the width */
     }
 
     input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
@@ -89,7 +92,7 @@
     }
 
     .success-message {
-      color: green;
+      color: #2ecc71;
       font-weight: bold;
     }
 
@@ -97,19 +100,31 @@
       text-align: left;
     }
 
-    .container::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      bottom: -10px;
-      left: -10px;
-      background: linear-gradient(135deg, rgba(116, 235, 213, 0.2), rgba(172, 182, 229, 0.2));
-      z-index: -1;
-      border-radius: 20px;
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+        width: 85%; /* Adjusted to match previous website's mobile size */
+        backdrop-filter: blur(10px); /* Apply blur effect on mobile */
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input[type="text"], input[type="email"], input[type="tel"], textarea {
+        font-size: 14px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 0;
+      }
+
+      .loading, .success-message {
+        font-size: 14px;
+      }
     }
 
-     @media (max-width: 400px) {
+    @media (max-width: 400px) {
       .container {
         padding: 10px;
         width: 90%; /* Further adjust container size for very small screens */
